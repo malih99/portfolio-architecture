@@ -7,11 +7,12 @@ import Portfolio from "./pages/Portfolio";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import { Toaster } from "react-hot-toast";
 
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen w-screen flex flex-col bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="min-h-screen w-screen flex flex-col bg-white dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300">
         <Header />
         <main className="flex-1">
           <Routes>
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           </Routes>
         </main>
         <Footer />
+        <Toaster position="top-right" />
       </div>
     </ThemeProvider>
   );
