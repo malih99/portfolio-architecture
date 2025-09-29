@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import Button from "../components/ui/Button";
 import ProjectGrid from "../components/portfolio/ProjectGrid";
 import { projects } from "../data/projects";
+import Img from "../components/ui/Image";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
+  const tt = (k: string) => String(t(k));
   const featured = projects.slice(0, 3);
 
   const ArrowRight = (p: React.SVGProps<SVGSVGElement>) => (
@@ -30,10 +32,10 @@ const Home: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-zinc-900 dark:text-zinc-100">
-            {t("homeTitle")}
+            {tt("homeTitle")}
           </h1>
           <p className="mt-5 text-base md:text-[17px] text-zinc-800 dark:text-zinc-200 max-w-xl">
-            {t("homeSubtitle")}
+            {tt("homeSubtitle")}
           </p>
           <div className="mt-6 flex gap-3">
             <Link to="/portfolio">
@@ -42,12 +44,12 @@ const Home: React.FC = () => {
                 variant="primary"
                 trailingIcon={<ArrowRight className="w-4.5 h-4.5" />}
               >
-                {t("viewPortfolio")}
+                {tt("viewPortfolio")}
               </Button>
             </Link>
             <Link to="/contact">
               <Button size="md" variant="outline">
-                {t("contactUs")}
+                {tt("contactUs")}
               </Button>
             </Link>
           </div>
@@ -58,10 +60,12 @@ const Home: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <img
+          <Img
             src="/images/hero.jpg"
-            alt="hero"
+            alt="Modern villa"
             className="w-full rounded-2xl shadow-xl object-cover h-72 md:h-96"
+            priority
+            ratio="16/9"
           />
         </motion.div>
       </section>
@@ -75,10 +79,10 @@ const Home: React.FC = () => {
           className="mb-6 md:mb-8"
         >
           <h2 className="text-xl md:text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-            {t("featuredProjects")}
+            {tt("featuredProjects")}
           </h2>
           <p className="mt-1 text-sm md:text-base text-zinc-700 dark:text-zinc-300 max-w-2xl">
-            {t("featuredSubtitle")}
+            {tt("featuredSubtitle")}
           </p>
         </motion.header>
 
@@ -91,7 +95,7 @@ const Home: React.FC = () => {
               size="md"
               trailingIcon={<ArrowRight className="w-4.5 h-4.5" />}
             >
-              {t("viewAllProjects")}
+              {tt("viewAllProjects")}
             </Button>
           </Link>
         </div>

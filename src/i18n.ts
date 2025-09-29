@@ -48,13 +48,16 @@ const resources = {
     translation: {
       navHome: "خانه",
       navPortfolio: "نمونه‌کارها",
-      navContact: "تماس",
+      navContact: "تماس با ما",
       homeTitle: "طراحی فضاهای نوآورانه",
       homeSubtitle:
         "ترکیبی از معماری، دکوراسیون داخلی و فناوری برای خلق فضاهایی کاربردی و زیبا.",
       featuredProjects: "پروژه‌های منتخب",
       featuredSubtitle:
         "نگاهی به برخی از کارهای اخیر ما در فضاهای مسکونی و تجاری.",
+      featuredProjects: "پروژه‌های شاخص",
+      featuredSubtitle:
+        "مروری بر برخی از کارهای اخیر ما در حوزه‌های مسکونی و تجاری.",
       viewPortfolio: "مشاهده نمونه‌کارها",
       viewAllProjects: "مشاهده همه پروژه‌ها",
       contactUs: "تماس با ما",

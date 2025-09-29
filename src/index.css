@@ -7,8 +7,10 @@
   --bg: #ffffff;
   --text: #111827; /* gray-900 */
   --muted: #f3f4f6; /* gray-100 */
-  --muted-foreground: #374151; /* gray-700 */
+  --muted-foreground: #475569; /* slate-600 - کمی پررنگ‌تر از قبل */
   --border: #e5e7eb; /* gray-200 */
+  --tw-text-opacity: 1;
+  --tw-bg-opacity: 1;
 }
 
 /* Dark overrides when <html class="dark"> */
@@ -18,15 +20,16 @@
   --muted: #0f172a; /* slate-900 */
   --muted-foreground: #cbd5e1; /* slate-300 */
   --border: rgba(255, 255, 255, 0.14);
+  --tw-text-opacity: 1;
+  --tw-bg-opacity: 1;
 }
 
-/* Base reset */
+/* ====== Base ====== */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
 html {
   font-size: var(--base-font);
 }
@@ -61,7 +64,7 @@ body {
     "Segoe UI Emoji";
 }
 
-/* Utilities */
+/* ====== Utilities ====== */
 .border-base {
   border-color: var(--border);
 }
@@ -77,7 +80,15 @@ body {
   margin-inline: auto;
 }
 
-/* Headings */
+/* Hover helpers با کنتراست بهتر */
+.hover-elevate:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.dark .hover-elevate:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Headings scale only (بدون تغییر رنگ) */
 h1 {
   font-size: 2.25rem;
   line-height: 1.15;
@@ -101,6 +112,24 @@ h1 {
   }
 }
 
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+  }
+}
+
+a {
+  color: inherit;
+}
+a.link-strong {
+  color: #4338ca;
+} /* indigo-700 */
+.dark a.link-strong {
+  color: #a5b4fc;
+} /* indigo-300 */
+
 /* Utility tokens for borders and cards (used by components) */
 .border-base {
   border-color: var(--border);
@@ -122,22 +151,6 @@ h1 {
 button {
   background-color: transparent;
   border: 1px solid transparent;
-}
-
-/* headings responsive */
-h1 {
-  font-size: 2rem;
-  line-height: 1.1;
-}
-@media (min-width: 640px) {
-  h1 {
-    font-size: 2.6rem;
-  }
-}
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 3.2rem;
-  }
 }
 
 /* buttons base */
@@ -191,3 +204,21 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+/* src/index.css */
+.hover-elevate:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+.dark .hover-elevate:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+a {
+  color: inherit;
+}
+a.link-strong {
+  color: #4338ca;
+} /* indigo-700 */
+.dark a.link-strong {
+  color: #a5b4fc;
+} /* indigo-300 */
