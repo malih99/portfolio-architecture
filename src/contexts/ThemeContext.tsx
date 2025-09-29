@@ -1,6 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
+// src/contexts/ThemeContext.tsx
+import React, { createContext, useEffect, useState, useMemo } from "react";
 
-export const ThemeContext = createContext({
+type Ctx = { dark: boolean; toggle: () => void };
+
+export const ThemeContext = createContext<Ctx>({
   dark: false,
   toggle: () => {},
 });
@@ -11,22 +14,21 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
   const [dark, setDark] = useState<boolean>(() => {
     const stored = localStorage.getItem("theme");
     if (stored) return stored === "dark";
-    return (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    );
+    return window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
   });
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (dark) root.classList.add("dark");
-    else root.classList.remove("dark");
+    const root = document.documentElement; // <html>
+    root.classList.toggle("dark", dark);
     localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
 
+  const value = useMemo(
+    () => ({ dark, toggle: () => setDark((d) => !d) }),
+    [dark]
+  );
+
   return (
-    <ThemeContext.Provider value={{ dark, toggle: () => setDark((d) => !d) }}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 };

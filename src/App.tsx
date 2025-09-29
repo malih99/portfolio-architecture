@@ -12,7 +12,10 @@ import { Toaster } from "react-hot-toast";
 const App: React.FC = () => {
   return (
     <ThemeProvider>
-      <div className="min-h-screen w-screen flex flex-col bg-white dark:bg-black text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div
+        className="min-h-screen w-full flex flex-col transition-colors duration-300"
+        style={{ background: "inherit", color: "inherit" }}
+      >
         <Header />
         <main className="flex-1">
           <Routes>

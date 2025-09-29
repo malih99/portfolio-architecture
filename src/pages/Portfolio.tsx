@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectGrid from "../components/portfolio/ProjectGrid";
-import { projects } from "../data/projects"; // 👈 دیتای جدا
+import { projects } from "../data/projects";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -16,21 +16,20 @@ const Portfolio: React.FC = () => {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35 }}
-        className="mb-6 md:mb-8"
+        className="mb-8"
       >
-        <div className="text-[11px] md:text-xs uppercase tracking-wider text-indigo-500/90 font-semibold">
-          {t("portfolioEyebrow") || "Portfolio"}
+        <div className="text-[11px] uppercase tracking-wider text-indigo-600 font-semibold">
+          {t("portfolioEyebrow")}
         </div>
-        <h2 className="mt-1 text-lg md:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-          {t("portfolioTitle") || "Featured Works"}
+        <h2 className="mt-1 text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
+          {t("portfolioTitle")}
         </h2>
-        <p className="mt-1 text-[12.5px] md:text-[13.5px] text-zinc-600 dark:text-zinc-300 max-w-2xl">
-          {t("portfolioSubtitle") ||
-            "A curated selection of our recent architecture and interior design projects."}
+        <p className="mt-1 text-[13.5px] text-zinc-700 dark:text-zinc-300 max-w-2xl">
+          {t("portfolioSubtitle")}
         </p>
       </motion.header>
 
-      <div className="h-px bg-black/5 dark:bg-white/10 mb-6 md:mb-8 rounded" />
+      <div className="h-px bg-black/10 dark:bg-white/10 mb-8 rounded" />
       <ProjectGrid projects={projects} />
     </div>
   );

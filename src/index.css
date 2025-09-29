@@ -1,45 +1,127 @@
 @import "tailwindcss";
 
+/* defaults (light) */
 :root {
   --container: 1200px;
   --base-font: 16px;
+  --bg: #ffffff;
+  --text: #111827; /* gray-900 */
+  --muted: #f3f4f6; /* gray-100 */
+  --muted-foreground: #374151; /* gray-700 */
+  --border: #e5e7eb; /* gray-200 */
+}
+
+/* Dark overrides when <html class="dark"> */
+.dark {
+  --bg: #0b1220;
+  --text: #e6eef8;
+  --muted: #0f172a; /* slate-900 */
+  --muted-foreground: #cbd5e1; /* slate-300 */
+  --border: rgba(255, 255, 255, 0.14);
+}
+
+/* Base reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--base-font);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    "Vazirmatn",
+    "IRANSans",
+    Tahoma,
+    "Apple Color Emoji",
+    "Segoe UI Emoji";
+}
+
+/* Utilities */
+.border-base {
+  border-color: var(--border);
+}
+.bg-muted {
+  background-color: var(--muted);
+}
+.text-muted-foreground {
+  color: var(--muted-foreground);
 }
 
 .container {
   max-width: var(--container);
+  margin-inline: auto;
 }
 
-/* global reset-ish */
-* {
-  box-sizing: border-box;
+/* Headings */
+h1 {
+  font-size: 2.25rem;
+  line-height: 1.15;
 }
-html {
-  font-size: 16px;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@media (min-width: 640px) {
+  h1 {
+    font-size: 2.75rem;
+  }
 }
-body {
-  margin: 0;
-  font-family:
-    Inter,
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial;
-  background-color: var(--bg, #ffffff);
-  color: var(--text, #213547);
-  min-width: 320px;
-  line-height: 1.45;
+@media (min-width: 1024px) {
+  h1 {
+    font-size: 3.25rem;
+  }
 }
 
-/* container helper (we also use Tailwind utilities) */
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Utility tokens for borders and cards (used by components) */
+.border-base {
+  border-color: var(--border);
+}
+.bg-muted {
+  background-color: var(--muted);
+}
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+
+/* helpers */
 .container {
   max-width: var(--container);
   margin-left: auto;
   margin-right: auto;
+}
+
+button {
+  background-color: transparent;
+  border: 1px solid transparent;
 }
 
 /* headings responsive */
@@ -60,16 +142,8 @@ h1 {
 
 /* buttons base */
 button {
-  border-radius: 8px;
+  background-color: transparent;
   border: 1px solid transparent;
-  padding: 0.55em 1.1em;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition:
-    border-color 0.2s,
-    transform 0.06s;
 }
 
 /* prefer-reduced-motion */
@@ -109,41 +183,11 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
 }
