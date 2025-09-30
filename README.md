@@ -1,18 +1,47 @@
-# Portfolio Architecture - Frontend Challenge
+# Architecture Portfolio
 
-A small React + Vite + TypeScript portfolio project for an architecture company.
-Shows projects, project detail with slider, and a contact form.
+A modern architecture portfolio website built with **React**, **TypeScript**, and **Vite**. Features dark/light mode, responsive design, multilingual support, and an interactive projects showcase with image sliders.
 
-## Tech stack
+## Features
 
-- React 18 + TypeScript
-- Vite
-- TailwindCSS
-- react-router-dom, axios, zustand, react-hook-form, yup, swiper
+* Responsive layout with TailwindCSS
+* Light/Dark theme toggle
+* Multi-language (i18next)
+* Project showcase with Swiper slider
+* Contact form with validation (Formik + Yup)
 
-## Run locally
+## Tech Stack
+
+* React + TypeScript + Vite
+* TailwindCSS
+* Framer Motion
+* React Router
+* Swiper.js
+* Formik & Yup
+* i18next
+
+## Getting Started
 
 ```bash
 npm install
 npm run dev
 ```
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+## Environment
+
+Create a `.env` file for local configs. Example:
+
+```bash
+VITE_API_URL=https://example.com/api
+```
+
+## License
+
+MIT License
