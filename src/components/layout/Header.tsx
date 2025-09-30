@@ -95,8 +95,8 @@ const Header: React.FC = () => {
 
           <div className="flex items-center gap-1.5">
             <Button
-              size="sm"
-              variant="soft"
+              size="xs"
+              variant="glass"
               leadingIcon={<Globe className="w-4 h-4" />}
               onClick={() => changeLang(i18n.language === "fa" ? "en" : "fa")}
               aria-label="toggle-language"
@@ -105,11 +105,11 @@ const Header: React.FC = () => {
             </Button>
 
             <Button
-              size="sm"
-              variant="soft"
+              size="xs"
+              variant="glass"
+              icon
               aria-label="toggle-theme"
               onClick={toggle}
-              className="!rounded-full w-8 px-0"
             >
               <span className="text-amber-400">
                 {dark ? (
@@ -121,9 +121,10 @@ const Header: React.FC = () => {
             </Button>
 
             <Button
-              size="sm"
-              variant="outline"
-              className="md:hidden !rounded-full w-8 px-0"
+              size="xs"
+              variant="glass"
+              icon
+              className="md:hidden"
               onClick={() => setOpen((v) => !v)}
               aria-label="toggle-menu"
             >
@@ -161,14 +162,14 @@ const Header: React.FC = () => {
                 <Link
                   to="/portfolio"
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-3 rounded-xl hover:bg:black/[.04] dark:hover:bg-white/[.06]"
+                  className="block px-3 py-3 rounded-xl hover:bg-black/[.04] dark:hover:bg-white/[.06]"
                 >
                   {t("navPortfolio")}
                 </Link>
                 <Link
                   to="/contact"
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-3 rounded-xl hover:bg-black/[.04] dark:hover:bg:white/[.06]"
+                  className="block px-3 py-3 rounded-xl hover:bg-black/[.04] dark:hover:bg-white/[.06]"
                 >
                   {t("navContact")}
                 </Link>

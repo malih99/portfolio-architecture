@@ -1,116 +1,110 @@
-// src/components/ui/Button.tsx
 import React, { forwardRef } from "react";
 import { motion, type HTMLMotionProps } from "framer-motion";
+import clsx from "clsx";
 
-type Variant = "primary" | "outline" | "soft" | "link";
-type Size = "sm" | "md" | "lg";
+type Variant = "primary" | "outline" | "soft" | "link" | "glass" | "ghost";
+type Size = "xs" | "sm" | "md" | "lg";
 
-type ButtonProps = HTMLMotionProps<"button"> & {
+type ButtonProps = Omit<HTMLMotionProps<"button">, "children"> & {
+  children?: React.ReactNode;
   variant?: Variant;
   size?: Size;
   fullWidth?: boolean;
   leadingIcon?: React.ReactNode;
   trailingIcon?: React.ReactNode;
   loading?: boolean;
+  /** وقتی true باشد، دکمه مربع و کاملاً گرد می‌شود (برای آیکن فقط) */
+  icon?: boolean;
 };
 
 const sizes: Record<Size, string> = {
+  xs: "h-8 px-2.5 text-[13px]",
   sm: "h-9 px-3 text-sm",
   md: "h-10 px-4 text-[15px]",
   lg: "h-11 px-5 text-base",
 };
+const iconSizes: Record<Size, string> = {
+  xs: "h-8 w-8",
+  sm: "h-9 w-9",
+  md: "h-10 w-10",
+  lg: "h-11 w-11",
+};
 
-const base = [
-  "inline-flex items-center justify-center gap-2",
-  "rounded-xl font-semibold select-none",
-  "transition-colors duration-150",
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2",
-  "focus-visible:ring-offset-white dark:focus-visible:ring-offset-zinc-900",
-  "disabled:opacity-50 disabled:pointer-events-none",
-].join(" ");
+const base =
+  "inline-flex items-center justify-center gap-2 font-medium tracking-[-0.01em] " +
+  "disabled:opacity-50 disabled:cursor-not-allowed select-none rounded-2xl " +
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--ring)] focus-visible:ring-offset-2 ring-offset-[var(--bg)] " +
+  "transition-colors duration-150 will-change-[background-color,color,border-color]";
 
 const variants: Record<Variant, string> = {
-  primary: [
-    "bg-indigo-600 text-white hover:bg-indigo-700",
-    "dark:bg-indigo-500 dark:hover:bg-indigo-400",
-    "shadow-sm",
-  ].join(" "),
-  outline: [
-    "bg-white text-zinc-900 border border-zinc-300 hover:bg-zinc-100",
-    "dark:bg-zinc-900/40 dark:text-zinc-100 dark:border-zinc-600 dark:hover:bg-zinc-800",
-  ].join(" "),
-  soft: [
-    "bg-indigo-50 text-indigo-700 hover:bg-indigo-100",
-    "dark:bg-indigo-950 dark:text-indigo-200 dark:hover:bg-indigo-900",
-  ].join(" "),
-  link: [
-    "bg-transparent p-0 h-auto",
-    "text-indigo-700 hover:underline underline-offset-4",
-    "dark:text-indigo-300",
-  ].join(" "),
+  primary:
+    "text-[var(--primary-foreground)] bg-[var(--primary)] hover:bg-[var(--primary-hover)] active:brightness-95 shadow-sm",
+  outline:
+    "bg-transparent text-[var(--text)] border border-[var(--border)] hover:bg-[var(--muted)] active:bg-[var(--muted)]/80",
+  soft: "text-[var(--accent-foreground)] bg-[var(--accent)] border border-[var(--accent-border)] hover:bg-[var(--accent)]/90 active:bg-[var(--accent)]/80 shadow-sm",
+  link: "bg-transparent text-[var(--primary)] hover:text-[var(--primary-hover)] underline underline-offset-4 p-0 h-auto rounded-none !ring-0",
+  /* برای هدر: شیشه‌ای + کنتراست امن در هر دو تم */
+  glass:
+    "backdrop-blur-md border text-[var(--text)]/90 " +
+    "border-black/10 dark:border-white/10 " +
+    "bg-white/60 dark:bg-white/5 " +
+    "hover:bg-white/75 dark:hover:bg-white/10 " +
+    "active:bg-white/90 dark:active:bg-white/15 " +
+    "shadow-[0_1px_0_0_rgba(0,0,0,.03)]",
+  /* شفاف با هاور ملایم */
+  ghost:
+    "bg-transparent text-[var(--text)] " +
+    "hover:bg-black/[.06] dark:hover:bg-white/[.08] " +
+    "active:bg-black/[.08] dark:active:bg-white/[.12]",
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
+      children,
+      className,
       variant = "primary",
       size = "md",
       fullWidth,
       leadingIcon,
       trailingIcon,
       loading,
-      children,
-      className = "",
+      icon,
       ...rest
     },
     ref
   ) => {
-    const cls = [
-      base,
-      variants[variant],
-      variant === "link" ? "" : sizes[size],
-      fullWidth ? "w-full" : "",
-      className,
-    ]
-      .filter(Boolean)
-      .join(" ");
+    const shape = icon ? `rounded-full ${iconSizes[size]}` : sizes[size];
 
     return (
       <motion.button
         ref={ref}
-        className={cls}
-        whileTap={variant === "link" ? undefined : { scale: 0.98 }}
+        whileTap={variant !== "link" ? { scale: 0.98 } : undefined}
+        className={clsx(
+          base,
+          variants[variant],
+          shape,
+          fullWidth && "w-full",
+          className
+        )}
         {...rest}
       >
         {loading ? (
           <>
-            <svg className="w-4 h-4 animate-spin" viewBox="0 0 24 24">
-              <circle
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-                fill="none"
-                opacity="0.25"
-              />
-              <path
-                d="M22 12a10 10 0 0 1-10 10"
-                stroke="currentColor"
-                strokeWidth="4"
-                fill="none"
-              />
-            </svg>
-            <span>Loading…</span>
+            <span className="sr-only">Loading</span>
+            <span className="inline-block animate-spin h-4 w-4 border-2 border-current border-t-transparent rounded-full" />
           </>
+        ) : icon ? (
+          // حالت آیکن-فقط
+          <span className="leading-none">{children}</span>
         ) : (
           <>
             {leadingIcon ? (
-              <span className="shrink-0">{leadingIcon}</span>
+              <span className="shrink-0 leading-none">{leadingIcon}</span>
             ) : null}
-            <span>{children}</span>
+            <span className="leading-none">{children}</span>
             {trailingIcon ? (
-              <span className="shrink-0">{trailingIcon}</span>
+              <span className="shrink-0 leading-none">{trailingIcon}</span>
             ) : null}
           </>
         )}

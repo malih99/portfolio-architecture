@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 
 const Portfolio: React.FC = () => {
   const { t, i18n } = useTranslation();
+  const tt = (k: string) => String(t(k));
 
   return (
     <div
@@ -19,13 +20,13 @@ const Portfolio: React.FC = () => {
         className="mb-8"
       >
         <div className="text-[11px] uppercase tracking-wider text-indigo-600 font-semibold">
-          {t("portfolioEyebrow")}
+          {tt("portfolioEyebrow")}
         </div>
         <h2 className="mt-1 text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">
-          {t("portfolioTitle")}
+          {tt("portfolioTitle")}
         </h2>
         <p className="mt-1 text-[13.5px] text-zinc-700 dark:text-zinc-300 max-w-2xl">
-          {t("portfolioSubtitle")}
+          {tt("portfolioSubtitle")}
         </p>
       </motion.header>
 

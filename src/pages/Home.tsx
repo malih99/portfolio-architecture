@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../components/ui/Button";
-import ProjectGrid from "../components/portfolio/ProjectGrid";
 import { projects } from "../data/projects";
 import Img from "../components/ui/Image";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import FeaturedProjectsSlider from "../components/portfolio/FeaturedProjectsSlider";
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -31,9 +31,9 @@ const Home: React.FC = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-zinc-900 dark:text-zinc-100">
+          <h2 className="text-3xl sm:text-4xl md:text-4xl font-bold leading-tight text-zinc-900 dark:text-zinc-100">
             {tt("homeTitle")}
-          </h1>
+          </h2>
           <p className="mt-5 text-base md:text-[17px] text-zinc-800 dark:text-zinc-200 max-w-xl">
             {tt("homeSubtitle")}
           </p>
@@ -86,7 +86,7 @@ const Home: React.FC = () => {
           </p>
         </motion.header>
 
-        <ProjectGrid projects={featured} />
+        <FeaturedProjectsSlider items={featured} />
 
         <div className="mt-8 text-center">
           <Link to="/portfolio">
